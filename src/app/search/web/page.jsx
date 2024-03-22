@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-
+import WebSearchResults from "@/components/WebSearchResults";
 export default async function WebSearchPage({ searchParams }) {
   const response =
     await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}
@@ -18,15 +18,13 @@ export default async function WebSearchPage({ searchParams }) {
           No results found for {searchParams.searchParams}
         </h1>
         <p className="text-lg">
-          Please try a different search term, web or images {" "}
-          <Link href="/" className='text-blue-500'>Home</Link>
+          Please try a different search term, web or images{" "}
+          <Link href="/" className="text-blue-500">
+            Home
+          </Link>
         </p>
-        <button className="text-blue-500" />
-        Try again
       </div>
     );
   }
-  return (
-    <div>{results && results.map((result) => <h1>{result.title}</h1>)}</div>
-  );
+  return <div>{results && <WebSearchResults results={data} />}</div>;
 }
